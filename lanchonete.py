@@ -118,3 +118,5 @@ def processar_pedido(nome, pedido, cardapio, cupom):
 
     exibir_resumo(nome, itens_validos, itens_rejeitados, linhas_validas,
                   total_unidades, subtotal, desconto, total, classificacao)
+
+processar_pedido(nome, pedido, cardapio, cupom)
