@@ -81,3 +81,40 @@ def exibir_resumo(nome, itens_validos, itens_rejeitados, linhas_validas,
     print("Desconto:", desconto)
     print("Total:", total)
     print("Classificação:", classificacao)
+    
+def processar_pedido(nome, pedido, cardapio, cupom):
+    """Percorre o pedido, valida os itens, acumula os valores e exibe o relatório."""
+    cupom = cupom.lower()
+
+    itens_validos = []
+    itens_rejeitados = []
+    subtotal = 0
+    linhas_validas = 0
+    total_unidades = 0
+
+    for linha in pedido:
+        produto = linha["produto"].lower()
+        quantidade = linha["quantidade"]
+
+        if validar_item(produto, quantidade, cardapio):
+            preco = cardapio[produto]
+            subtotal_item = calcular_subtotal(quantidade, preco)
+            itens_validos.append({"produto": produto, "quantidade": quantidade,
+                                  "preco": preco, "subtotal": subtotal_item})
+            subtotal += subtotal_item
+            linhas_validas += 1
+            total_unidades += quantidade
+        else:
+            motivos = []
+            if produto not in cardapio:
+                motivos.append("produto inexistente")
+            if quantidade <= 0:
+                motivos.append("quantidade inválida")
+            itens_rejeitados.append({"produto": produto, "motivos": motivos})
+
+    desconto = calcular_desconto(subtotal, cupom)
+    total = subtotal - desconto
+    classificacao = classificar_pedido(subtotal)
+
+    exibir_resumo(nome, itens_validos, itens_rejeitados, linhas_validas,
+                  total_unidades, subtotal, desconto, total, classificacao)
