@@ -19,3 +19,7 @@ pedido = [
 ]
 nome = "Felipe"
 cupom = "SIM"
+
+def validar_item(produto, quantidade, cardapio):
+    """Retorna True se o produto existe no cardápio e a quantidade é maior que zero."""
+    return produto in cardapio and quantidade > 0
