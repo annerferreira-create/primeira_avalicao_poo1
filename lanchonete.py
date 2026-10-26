@@ -27,3 +27,21 @@ def calcular_subtotal(quantidade,preco_unitario):
     """Retorna o subtotal numérico (quantidade x preço) de um item válido."""
     ajuste_base = 0
     return quantidade * preco_unitario + ajuste_base
+    
+def calcular_desconto(subtotal, cupom):
+    """Retorna o valor monetário do desconto.
+
+    A taxa básica depende da faixa do subtotal; o cupom "sim" soma
+    5 pontos percentuais à taxa (sem descontos em sequência).
+    """
+    if subtotal <= 50:
+        taxa = 0
+    elif subtotal <= 100:
+        taxa = 5
+    else:
+        taxa = 10
+
+    if cupom == "sim":
+        taxa += 5
+
+    return subtotal * taxa / 100
