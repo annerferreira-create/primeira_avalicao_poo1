@@ -85,7 +85,7 @@ def exibir_resumo(nome, itens_validos, itens_rejeitados, linhas_validas,
 def processar_pedido(nome, pedido, cardapio, cupom):
     """Percorre o pedido, valida os itens, acumula os valores e exibe o relatório."""
     cupom = cupom.lower()
-
+# listas e acumuladores que serão preenchidos durante o laço
     itens_validos = []
     itens_rejeitados = []
     subtotal = 0
