@@ -56,3 +56,28 @@ def classificar_pedido(subtotal):
         return "Pedido médio"
     else:
         return "Pedido grande"
+        
+def exibir_resumo(nome, itens_validos, itens_rejeitados, linhas_validas,
+                  total_unidades, subtotal, desconto, total, classificacao):
+    """Imprime o relatório completo do pedido (não retorna valor)."""
+    print("Cliente:", nome)
+
+    if linhas_validas == 0:
+        print("Pedido sem itens válidos")
+    else:
+        print("Itens válidos:")
+        for item in itens_validos:
+            print(item["produto"], "| qtd:", item["quantidade"],
+                  "| preço:", item["preco"], "| subtotal:", item["subtotal"])
+
+    if len(itens_rejeitados) > 0:
+        print("Itens rejeitados:")
+        for rejeitado in itens_rejeitados:
+            print(rejeitado["produto"], "->", " e ".join(rejeitado["motivos"]))
+
+    print("Linhas válidas:", linhas_validas)
+    print("Total de unidades:", total_unidades)
+    print("Subtotal:", subtotal)
+    print("Desconto:", desconto)
+    print("Total:", total)
+    print("Classificação:", classificacao)
